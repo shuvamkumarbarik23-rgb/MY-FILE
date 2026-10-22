@@ -15,7 +15,7 @@ from telethon import TelegramClient, events, Button
 from telethon.tl.types import MessageEntityTextUrl, MessageEntityMentionName
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant, RPCError
-
+from telethon import Button
 
 
 # =====================================================================
@@ -26,8 +26,8 @@ API_HASH = '7c8698253f793351677cd0a54a6d3692'
 BOT_TOKEN = '8752884579:AAGYdEXj1bdjFQgladu6qx_7U4QTMhR_Uz8'  # @BotFather se lo
 OWNER_ID = 8734813395# Teri ID
 CO_OWNER_ID = 5183116678
-FORCE_CHANNEL = "Army"
-CHANNEL_LINK = "https://t.me/sukunasarmye"
+CHANNEL_USERNAME = "Army"
+CHANNEL_LINK = "https://t.me/sukunasarmy"
 ARMY_USERS = [5183116678]
 ARMY_USERS = [ 8734813395]
 bot_status = "online"
@@ -789,6 +789,53 @@ def update_groups_sync():
 
 def save_groups():
     write_json("groups.json", GROUPS_CACHE)
+
+
+# =====================================================================
+# ===== FORCE SUBSCRIBE CHANNEL SETTINGS =====
+# =====================================================================
+
+
+async def is_channel_member(user_id):
+    try:
+        participant = await bot.get_permissions(
+            CHANNEL_USERNAME, user_id
+        )
+        return True
+    except Exception:
+        return False
+
+
+@bot.on(events.NewMessage(pattern=r"^/start$"))
+async def force_subscribe(event):
+    if not event.is_private:
+        return
+
+    if await is_channel_member(event.sender_id):
+        await event.respond(
+            "Welcome! You can now use the bot."
+        )
+    else:
+        await event.respond(
+            "Please join our channel first, then send /start again.",
+            buttons=[
+                [Button.url("📢 Join Channel", CHANNEL_LINK)],
+                [Button.inline("✅ I've Joined", b"check_join")]
+            ]
+        )
+
+
+@bot.on(events.CallbackQuery(data=b"check_join"))
+async def check_join_callback(event):
+    if await is_channel_member(event.sender_id):
+        await event.answer("Membership verified!", alert=True)
+        await event.respond("✅ You can now use the bot.")
+    else:
+        await event.answer(
+            "You haven't joined the channel yet.",
+            alert=True
+        )
+
 
 # =====================================================================
 # 🚫 MUTE CHECK
