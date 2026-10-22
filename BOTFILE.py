@@ -13,8 +13,6 @@ from datetime import datetime
 from aiohttp import web
 from telethon import TelegramClient, events, Button
 from telethon.tl.types import MessageEntityTextUrl, MessageEntityMentionName
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram.errors import UserNotParticipant, RPCError
 from telethon import Button
 
 
