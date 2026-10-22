@@ -13,6 +13,10 @@ from datetime import datetime
 from aiohttp import web
 from telethon import TelegramClient, events, Button
 from telethon.tl.types import MessageEntityTextUrl, MessageEntityMentionName
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import UserNotParticipant, RPCError
+
+
 
 # =====================================================================
 # ⚙️ CONFIG - APNA YAHI DAALO
@@ -22,7 +26,8 @@ API_HASH = '7c8698253f793351677cd0a54a6d3692'
 BOT_TOKEN = '8752884579:AAGYdEXj1bdjFQgladu6qx_7U4QTMhR_Uz8'  # @BotFather se lo
 OWNER_ID = 8734813395# Teri ID
 CO_OWNER_ID = 5183116678
-
+FORCE_CHANNEL = "Army"
+CHANNEL_LINK = "https://t.me/sukunasarmye"
 ARMY_USERS = [5183116678]
 ARMY_USERS = [ 8734813395]
 bot_status = "online"
