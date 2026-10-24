@@ -1161,7 +1161,7 @@ async def command_handler(event):
         return
     
     # ===== .shayari =====
-    if cmd == "shayari":
+   if cmd == "shayari":
         if not args:
             types_text = "\n".join([f"• `{t}` — {len(v)} lines" for t,v in shayari_data.items()])
             await event.reply(f"📖 **SHAYARI HUB**\n\n{types_text}\n\nAdd: `.shayari [type] [line]`\nSend: `.shayari [type] @user [count]`\nTypes: love, sad, roast, romantic, attitude, abuse, funny")
@@ -1198,11 +1198,6 @@ async def command_handler(event):
                 await event.reply(f"✅ Added to `{stype}`! Total: `{len(shayari_data[stype])}`")
         else:
             await event.reply(f"❌ Usage: `.shayari {stype} @user [count]` ya `.shayari {stype} [line]`")
-        return
-    
-    if cmd == "shayaritypes":
-        types_text = "\n".join([f"• `{t}` — {len(v)} lines" for t,v in shayari_data.items()])
-        await event.reply(f"📖 **SHAYARI TYPES**\n\n{types_text}")
         return
     
     # ===== .addsticker =====
